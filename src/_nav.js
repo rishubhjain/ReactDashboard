@@ -24,7 +24,62 @@ const _nav = [
       color: 'info',
       text: 'NEW',
     },
-  }
+  },
+  {
+    component: CNavItem,
+    name: 'HRMS Dashboard',
+    to: '/dashboard',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
+
+  },
+  {
+    component: CNavTitle,
+    name: 'WMS',
+  },
+  {
+    component: CNavItem,
+    name: 'Login',
+    to: '/dashboard',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Reports',
+    to: '/dashboard',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
+    name: 'SAATHI',
+  },
+  {
+    component: CNavItem,
+    name: 'Login',
+    to: '/dashboard',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Reports',
+    to: '/dashboard',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
+    name: 'IFMS',
+  },
+  {
+    component: CNavItem,
+    name: 'Login',
+    to: '/dashboard',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Reports',
+    to: '/dashboard',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
   
 ]
 

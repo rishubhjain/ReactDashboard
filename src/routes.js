@@ -52,6 +52,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  { path: '/login', exact: true, name: 'Login' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
@@ -80,7 +81,7 @@ const routes = [
   { path: '/forms/form-control', name: 'Form Control', component: FormControl },
   { path: '/forms/select', name: 'Select', component: Select },
   { path: '/forms/checks-radios', name: 'Checks & Radios', component: ChecksRadios },
-  { path: '/forms/range', name: 'Range', component: Range },
+  { path: '/forms/range', name: 'Work', component: Range },
   { path: '/forms/input-group', name: 'Input Group', component: InputGroup },
   { path: '/forms/floating-labels', name: 'Floating Labels', component: FloatingLabels },
   { path: '/forms/layout', name: 'Layout', component: Layout },

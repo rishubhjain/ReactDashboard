@@ -1,12 +1,30 @@
 import React, { lazy } from 'react'
 
+import BaseTable, { Column,
+  SortOrder,
+  AutoResizer,
+  normalizeColumns,
+  callOrReturn,
+  unflatten,
+  TableHeader as BaseTableHeader,
+  TableRow as BaseTableRow, } from 'react-base-table'
+import 'react-base-table/styles.css'
+
+import  { useState } from 'react'
 import {
-  CAvatar,
+ 
+  CModal,
+  CModalBody,
+  CModalFooter,
+  CModalHeader,
+  CModalTitle,
+} from '@coreui/react'
+
+
+import {
   CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,  
   CRow,
@@ -14,50 +32,61 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,  
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
 
 } from '@coreui/react'
+// import { cifAU } from '@coreui/icons'
+
+// import ReactDOM from "react-dom";
 import { CChartBar, CChartLine,
   CChartPie, } from '@coreui/react-chartjs'
-import {DocsExample } from 'src/components'
-import OrgChart from '@unicef/react-org-chart'
+// import {DocsExample } from 'src/components'
+// import OrgChart from '@unicef/react-org-chart'
 
-import { getStyle, hexToRgba } from '@coreui/utils'
+// import { getStyle, hexToRgba } from '@coreui/utils'
 import CIcon from '@coreui/icons-react'
 import {
-	
-  cibCcAmex,
-  cibCcApplePay,
-  cibCcMastercard,
-  cibCcPaypal,
-  cibCcStripe,
-  cibCcVisa,
-  cibGoogle,
-  cibFacebook,
-  cibLinkedin,
-  cifBr,
-  cifEs,
-  cifFr,
-  cifIn,
-  cifPl,
-  cifUs,
-  cibTwitter,
-  cilCloudDownload,
-  cilPeople,
-  cilUser,
-  cilUserFemale,
+  cilFilter,
 } from '@coreui/icons'
+// import {
+	
+//   cibCcAmex,
+//   cibCcApplePay,
+//   cibCcMastercard,
+//   cibCcPaypal,
+//   cibCcStripe,
+//   cibCcVisa,
+//   cibGoogle,
+//   cibFacebook,
+//   cibLinkedin,
+//   cifBr,
+//   cifEs,
+//   cifFr,
+//   cifIn,
+//   cifPl,
+//   cifUs,
+//   cibTwitter,
+//   cilCloudDownload,
+//   cilPeople,
+//   cilUser,
+//   cilUserFemale,
+// } from '@coreui/icons'
 
-import avatar1 from 'src/assets/images/avatars/1.jpg'
-import avatar2 from 'src/assets/images/avatars/2.jpg'
-import avatar3 from 'src/assets/images/avatars/3.jpg'
-import avatar4 from 'src/assets/images/avatars/4.jpg'
-import avatar5 from 'src/assets/images/avatars/5.jpg'
-import avatar6 from 'src/assets/images/avatars/6.jpg'
+// const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
+// const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
-const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
-const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
+
+
 
 const Dashboard = () => {
+
+  const [visible, setVisible] = useState(false)
+
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
@@ -66,136 +95,158 @@ const Dashboard = () => {
     return Math.round(Math.random() * 100)
   }
 
-  const progressExample = [
-    { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
-    { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
-    { title: 'Pageviews', value: '78.706 Views', percent: 60, color: 'warning' },
-    { title: 'New Users', value: '22.123 Users', percent: 80, color: 'danger' },
-    { title: 'Bounce Rate', value: 'Average Rate', percent: 40.15, color: 'primary' },
-  ]
 
-  const progressGroupExample1 = [
-    { title: 'Monday', value1: 34, value2: 78 },
-    { title: 'Tuesday', value1: 56, value2: 94 },
-    { title: 'Wednesday', value1: 12, value2: 67 },
-    { title: 'Thursday', value1: 43, value2: 91 },
-    { title: 'Friday', value1: 22, value2: 73 },
-    { title: 'Saturday', value1: 53, value2: 82 },
-    { title: 'Sunday', value1: 9, value2: 69 },
-  ]
+  const generateColumns = (count = 10, prefix = 'column-', props) =>
+  new Array(count).fill(0).map((column, columnIndex) => ({
+    ...props,
+    key: `${prefix}${columnIndex}`,
+    dataKey: `${prefix}${columnIndex}`,
+    title: `Column ${columnIndex}`,
+    width: 150,
+  }))
 
-  const progressGroupExample2 = [
-    { title: 'Male', icon: cilUser, value: 53 },
-    { title: 'Female', icon: cilUserFemale, value: 43 },
-  ]
+const generateData = (columns, count = 200, prefix = 'row-') =>
+  new Array(count).fill(0).map((row, rowIndex) => {
+    return columns.reduce(
+      (rowData, column, columnIndex) => {
+        rowData[column.dataKey] = `Row ${rowIndex} - Col ${columnIndex}`
+        return rowData
+      },
+      {
+        id: `${prefix}${rowIndex}`,
+        parentId: null,
+      }
+    )
+  })
 
-  const progressGroupExample3 = [
-    { title: 'Organic Search', icon: cibGoogle, percent: 56, value: '191,235' },
-    { title: 'Facebook', icon: cibFacebook, percent: 15, value: '51,223' },
-    { title: 'Twitter', icon: cibTwitter, percent: 11, value: '37,564' },
-    { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
-  ]
+  const columns = generateColumns(10)
+  const data = generateData(columns, 200)
 
-  const tableExample = [
-    {
-      avatar: { src: avatar1, status: 'success' },
-      user: {
-        name: 'Yiorgos Avraamu',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'USA', flag: cifUs },
-      usage: {
-        value: 50,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-    },
-    {
-      avatar: { src: avatar2, status: 'danger' },
-      user: {
-        name: 'Avram Tarasios',
-        new: false,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'info',
-      },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-    },
-    {
-      avatar: { src: avatar3, status: 'warning' },
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'warning',
-      },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-    },
-    {
-      avatar: { src: avatar4, status: 'secondary' },
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'danger',
-      },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-    },
-    {
-      avatar: { src: avatar5, status: 'success' },
-      user: {
-        name: 'Agapetus Tadeáš',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Spain', flag: cifEs },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'primary',
-      },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
-      activity: 'Last week',
-    },
-    {
-      avatar: { src: avatar6, status: 'danger' },
-      user: {
-        name: 'Friderik Dávid',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Poland', flag: cifPl },
-      usage: {
-        value: 43,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Amex', icon: cibCcAmex },
-      activity: 'Last week',
-    },
-  ]
+
+
+const frozenData = generateData(columns, 3, 'frozen-row-')
+
+const fixedColumns = columns.map((column, columnIndex) => {
+  let frozen
+  if (columnIndex < 2) frozen = Column.FrozenDirection.LEFT
+  if (columnIndex > 8) frozen = Column.FrozenDirection.RIGHT
+  return { ...column, frozen }
+})
+
+const expandColumnKey = 'column-0'
+
+// add some sub items
+for (let i = 0; i < 3; i++) {
+  data.push({
+    ...data[0],
+    id: `${data[0].id}-sub-${i}`,
+    parentId: data[0].id,
+    [expandColumnKey]: `Sub ${i}`,
+  })
+  data.push({
+    ...data[2],
+    id: `${data[2].id}-sub-${i}`,
+    parentId: data[2].id,
+    [expandColumnKey]: `Sub ${i}`,
+  })
+  data.push({
+    ...data[2],
+    id: `${data[2].id}-sub-sub-${i}`,
+    parentId: `${data[2].id}-sub-${i}`,
+    [expandColumnKey]: `Sub-Sub ${i}`,
+  })
+}
+const treeData = unflatten(data)
+
 
   return (
     <>
-
+    {/* <CRow>
+      <CCol>
+      <BaseTable
+    columns={fixedColumns}
+    data={treeData}
+    frozenData={frozenData}
+    width={600}
+    height={400}
+    expandColumnKey={expandColumnKey}
+  />
+      </CCol>
+    </CRow> */}
     <CRow>
+      <CCol>
+     <CModal alignment="center" visible={visible} onClose={() => setVisible(false)}>
+      <CModalHeader>
+        <CModalTitle>Hot Mix Plant Status</CModalTitle>
+      </CModalHeader>
+      <CModalBody>
+      <CTable>
+        <CTableHead color="light">
+          <CTableRow>
+            <CTableHeaderCell scope="col">#</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Name of Agency</CTableHeaderCell>
+            <CTableHeaderCell scope="col">District</CTableHeaderCell>
+            <CTableHeaderCell scope="col">NetMix</CTableHeaderCell>
+          </CTableRow>
+        </CTableHead>
+        <CTableBody>
+          <CTableRow>
+            <CTableHeaderCell scope="row">1</CTableHeaderCell>
+            <CTableDataCell>Ronak Construction</CTableDataCell>
+            <CTableDataCell>Bharuch</CTableDataCell>
+            <CTableDataCell>320</CTableDataCell>
+          </CTableRow>
+          <CTableRow>
+            <CTableHeaderCell scope="row">2</CTableHeaderCell>
+            <CTableDataCell>Dev Construction</CTableDataCell>
+            <CTableDataCell>Navsari</CTableDataCell>
+            <CTableDataCell>985</CTableDataCell>
+          </CTableRow>
+          <CTableRow>
+            <CTableHeaderCell scope="row">3</CTableHeaderCell>
+            <CTableDataCell>L.G.Chaudhary</CTableDataCell>
+            <CTableDataCell>Ahmedabad</CTableDataCell>
+            <CTableDataCell>426.80</CTableDataCell>
+          </CTableRow>
+        </CTableBody>
+      </CTable>
+      </CModalBody>
+      <CModalFooter>
+        <CButton color="secondary" onClick={() => setVisible(false)}>
+          Close
+        </CButton>
+        
+      </CModalFooter>
+    </CModal>
+      </CCol>
+    </CRow>
+    <CRow>
+    <CCard className="mb-4">
+
+          <CCardHeader className="me-md-3">
+            <a>WMS</a>
+           
+            <CDropdown
+            style={{float:'right',marginLeft:'5%'}}> 
+          <CDropdownToggle color="light">Location</CDropdownToggle>
+          <CDropdownMenu>
+            <CDropdownItem href="#">All</CDropdownItem>
+            <CDropdownItem href="#">SH</CDropdownItem>
+            <CDropdownItem href="#">NH</CDropdownItem>
+          </CDropdownMenu>
+        </CDropdown>
+        
+          </CCardHeader>
+          
+    <CRow>
+      
     <CCol xs={4}>
         <CCard className="mb-3">
           <CCardHeader>Work</CCardHeader>
           <CCardBody>
             <CChartPie
+              
+              //onClick={() => setVisible(!visible)}
               data={{
                 labels: ['Completed', 'Dropped', 'Pending'],
                 datasets: [
@@ -210,22 +261,11 @@ const Dashboard = () => {
           </CCardBody>
         </CCard>
       </CCol>
-    </CRow>
-          
-          
-    <CRow>
-	   <CCol xs={6}>
+      <CCol xs={8}>
         <CCard className="mb-4">
           <CCardHeader className="me-md-3">
             <a>Work Type Status</a>
-          <CDropdown style={{marginLeft:'55%'}}> 
-          <CDropdownToggle color="light">Location</CDropdownToggle>
-          <CDropdownMenu>
-            <CDropdownItem href="#">All</CDropdownItem>
-            <CDropdownItem href="#">SH</CDropdownItem>
-            <CDropdownItem href="#">NH</CDropdownItem>
-          </CDropdownMenu>
-        </CDropdown>
+          
           </CCardHeader>
           <CCardBody>
             <CChartLine
@@ -271,8 +311,8 @@ const Dashboard = () => {
         </CCard>
        </CCol>
 	   
-	   <CCol xs={6}>
-        <CCard className="mb-4">
+	   <CCol xs={8}>
+        <CCard className="mb-6">
           <CCardHeader>Bar Chart</CCardHeader>
           <CCardBody>
             <CChartBar
@@ -291,13 +331,75 @@ const Dashboard = () => {
           </CCardBody>
         </CCard>
       </CCol>
+    </CRow>
+          
+          
+    <CRow>
+	   
 	  </CRow>
-	  
+    <CRow className="mb-2">
+    <CCard className="mb-2">
+          <CCardHeader className="me-md-3">
+            <a>Scada</a>
+            </CCardHeader>
+            </CCard>
+            <CCol xs={4}>
+        <CCard className="mb-3">
+          <CCardHeader>Hot Mix Plant Status</CCardHeader>
+          <CCardBody>
+            <CChartPie
+              getElementAtEvent={(elements, event) => {
+                console.log("Here")
+                if (event.type === "click" && elements.length) {
+                  console.log(elements[0]);
+                    setVisible(!visible)
+                  
+                }
+              }}
+              data={{
+                labels: ['Offline', 'Online'],
+                datasets: [
+                  {
+                    data: [newRandom(), newRandom()],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)' ],
+                    borderColor:['rgb(255, 99, 132)','rgb(54, 162, 235)'],
+                    borderWidth: 1,
+                    hoverBackgroundColor: ['#FF6384', '#36A2EB'],
+                  },
+                ],
+              }}
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={8}>
+        <CCard className="mb-3">
+          <CCardHeader>Production of Online Plants</CCardHeader>
+          <CCardBody>
+            <CChartBar
+              data={{
+                labels: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Today'],
+                datasets: [
+                  {
+                    label: 'Production (in metric ton)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2) ',
+                    borderColor:'rgb(54, 162, 235)',
+                    borderWidth: 1,
+                    data: [newRandom(), newRandom(), newRandom(), newRandom(), newRandom(), newRandom(), newRandom(), newRandom(), newRandom()],
+                  },
+                ],
+              }}
+              labels="months"
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
 	  <CRow>
 	  <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>React Button</strong> <small>Pill</small>
+            <strong>Work Status</strong>
           </CCardHeader>
           <CCardBody>
            
@@ -305,23 +407,23 @@ const Dashboard = () => {
                   Total
                   <p fontSize="medium" style={{color:'black'}} >10</p>
                 </CButton>
-                <CButton color="danger" size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="0" >
+                <CButton color="danger" size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="1" >
                   In Process
                   <p fontSize="medium" style={{color:'black'}} >10</p>
                 </CButton>
-                <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="0" >
+                <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="2" >
                   Delay 50%
                   <p fontSize="medium" style={{color:'black'}} >10</p>
                 </CButton>
-                <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="0" >
+                <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="3" >
                   Delay 100%
                   <p fontSize="medium" style={{color:'black'}} >10</p>
                 </CButton>
-                <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="0" >
+                <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="4" >
                   Delay 200%
                   <p fontSize="medium" style={{color:'black'}} >10</p>
                 </CButton>
-                <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="0" >
+                <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="5" >
                   Completed
 				  <p fontSize="medium" style={{color:'black'}} >10</p>
                 </CButton>
@@ -331,7 +433,9 @@ const Dashboard = () => {
         </CCard>
       </CCol>
 	  </CRow>
-      
+    
+    </CCard>
+    </CRow>
     </>
   )
 }
