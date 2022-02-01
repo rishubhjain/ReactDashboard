@@ -1,5 +1,5 @@
 import React, { lazy } from 'react'
-
+import { Link } from 'react-router-dom'
 import BaseTable, { Column,
   SortOrder,
   AutoResizer,
@@ -80,9 +80,6 @@ import {
 // const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 // const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
-
-
-
 const Dashboard = () => {
 
   const [visible, setVisible] = useState(false)
@@ -94,7 +91,6 @@ const Dashboard = () => {
   const newRandom = () => {
     return Math.round(Math.random() * 100)
   }
-
 
   const generateColumns = (count = 10, prefix = 'column-', props) =>
   new Array(count).fill(0).map((column, columnIndex) => ({
@@ -121,6 +117,8 @@ const generateData = (columns, count = 200, prefix = 'row-') =>
 
   const columns = generateColumns(10)
   const data = generateData(columns, 200)
+
+  const dataLabels = ['<5 Cr', '>=5 Cr', '>=10 Cr', '>=15 Cr', '>=20 Cr', '>=25 Cr', '>=30 Cr']
 
 
 
@@ -156,8 +154,7 @@ for (let i = 0; i < 3; i++) {
     [expandColumnKey]: `Sub-Sub ${i}`,
   })
 }
-const treeData = unflatten(data)
-
+const treeData = unflatten(data);
 
   return (
     <>
@@ -224,17 +221,35 @@ const treeData = unflatten(data)
     <CCard className="mb-4">
 
           <CCardHeader className="me-md-3">
-            <a>WMS</a>
-           
+            <a>Works Monitoring System</a>
             <CDropdown
-            style={{float:'right',marginLeft:'5%'}}> 
-          <CDropdownToggle color="light">Location</CDropdownToggle>
+            style={{float:'right',marginLeft:'2%'}}> 
+          <CDropdownToggle color="light">Monthly</CDropdownToggle>
           <CDropdownMenu>
-            <CDropdownItem href="#">All</CDropdownItem>
-            <CDropdownItem href="#">SH</CDropdownItem>
-            <CDropdownItem href="#">NH</CDropdownItem>
+          <CDropdownItem href="#">Monthly</CDropdownItem>
+            <CDropdownItem href="#">Weekly</CDropdownItem>
+            <CDropdownItem href="#">Daily</CDropdownItem>
+            <CDropdownItem href="#">Custom Date</CDropdownItem>
+            
           </CDropdownMenu>
         </CDropdown>
+            <CDropdown
+            style={{float:'right',marginLeft:'2%'}}> 
+          <CDropdownToggle color="light">All Wings</CDropdownToggle>
+          <CDropdownMenu>
+            <CDropdownItem href="#">All Wings</CDropdownItem>
+            <CDropdownItem href="#">State</CDropdownItem>
+            <CDropdownItem href="#">NH</CDropdownItem>
+            <CDropdownItem href="#">Panchayat</CDropdownItem>
+            <CDropdownItem href="#">CP{'&'}A</CDropdownItem>
+            <CDropdownItem href="#">PPU</CDropdownItem>
+            <CDropdownItem href="#">WB</CDropdownItem>
+            <CDropdownItem href="#">QC</CDropdownItem>
+            <CDropdownItem href="#">STC</CDropdownItem>
+
+          </CDropdownMenu>
+        </CDropdown>
+       
         
           </CCardHeader>
           
@@ -242,7 +257,9 @@ const treeData = unflatten(data)
       
     <CCol xs={4}>
         <CCard className="mb-3">
+        <Link to="/dashboard/workDetails">
           <CCardHeader>Work</CCardHeader>
+          </Link>
           <CCardBody>
             <CChartPie
               
@@ -262,13 +279,15 @@ const treeData = unflatten(data)
         </CCard>
       </CCol>
       <CCol xs={8}>
-        <CCard className="mb-4">
+        <CCard className="mb-3">
           <CCardHeader className="me-md-3">
-            <a>Work Type Status</a>
-          
+          <Link to="/dashboard/work">
+            <a>Work Status</a>
+            </Link>
           </CCardHeader>
           <CCardBody>
             <CChartLine
+            
               data={{
                 labels: ['Site Information ', 'AA', 'TS', 'DTP', 'Tender', 'Tender Approval', 'Work Order'],
                 datasets: [
@@ -313,16 +332,52 @@ const treeData = unflatten(data)
 	   
 	   <CCol xs={8}>
         <CCard className="mb-6">
-          <CCardHeader>Bar Chart</CCardHeader>
+          <CCardHeader>Work Order vs Expense
+          <CDropdown
+          
+            style={{float:'right',marginLeft:'2%'}}> 
+          <CDropdownToggle color="light">Cost Range Wise</CDropdownToggle>
+          <CDropdownMenu>
+          <CDropdownItem  key="0" href="#">Date Wise</CDropdownItem>
+          <CDropdownItem  key="1" href="#">Cost Range Wise</CDropdownItem>
+          </CDropdownMenu>
+        </CDropdown>     
+
+
+          </CCardHeader>
           <CCardBody>
             <CChartBar
+            options={{
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked:true,
+                  position: 'left',
+                }, 
+                z:{
+                  stacked:true,
+                  position: 'right',
+                }
+              }
+            }}
               data={{
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels: dataLabels,
                 datasets: [
                   {
-                    label: 'Work Order Wise Expense',
+                    yAxisID: 'y',
+                    label: 'Number of Work Orders',
                     backgroundColor: '#f87979',
-                    data: [newRandom(), newRandom(), newRandom(), newRandom(), newRandom(), newRandom(), newRandom(), newRandom(), newRandom()],
+                    stack: 'Stack 0',
+                    data: [newRandom()/2, newRandom()/2, newRandom()/2, newRandom()/2, newRandom()/2, newRandom()/2, newRandom()/2, newRandom()/2, newRandom()/2],
+                  },
+                  {
+                    yAxisID: 'z',
+                    label: 'Total Expense (Rs)',
+                    stack: 'Stack 1',
+                    data: [newRandom() + 10000, newRandom()+ 10000, newRandom()+ 10000, newRandom()+ 10000, newRandom()+ 10000, newRandom()+ 10000, newRandom()+ 10000, newRandom()+ 10000, newRandom()+ 10000],
+                    backgroundColor: 'rgba(220, 159, 49, 0.2)',
                   },
                 ],
               }}
@@ -399,17 +454,17 @@ const treeData = unflatten(data)
 	  <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Work Status</strong>
+            <strong>Work Order Status</strong>
           </CCardHeader>
           <CCardBody>
            
                 <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="0" >
                   Total
-                  <p fontSize="medium" style={{color:'black'}} >10</p>
+                  <p fontSize="medium" style={{color:'black'}} >100</p>
                 </CButton>
                 <CButton color="danger" size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="1" >
                   In Process
-                  <p fontSize="medium" style={{color:'black'}} >10</p>
+                  <p fontSize="medium" style={{color:'black'}} >60</p>
                 </CButton>
                 <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="2" >
                   Delay 50%
@@ -417,15 +472,15 @@ const treeData = unflatten(data)
                 </CButton>
                 <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="3" >
                   Delay 100%
-                  <p fontSize="medium" style={{color:'black'}} >10</p>
+                  <p fontSize="medium" style={{color:'black'}} >5</p>
                 </CButton>
                 <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="4" >
                   Delay 200%
-                  <p fontSize="medium" style={{color:'black'}} >10</p>
+                  <p fontSize="medium" style={{color:'black'}} >2</p>
                 </CButton>
                 <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="5" >
                   Completed
-				  <p fontSize="medium" style={{color:'black'}} >10</p>
+				  <p fontSize="medium" style={{color:'black'}} >40</p>
                 </CButton>
                 
 

@@ -11,10 +11,12 @@ import {
   CFormInput,
   CInputGroup,
   CInputGroupText,
+  CAvatar,
   CRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import avatar8 from './../../../assets/images/avatars/R&BD.jpg'
 
 const Login = () => {
   return (
@@ -26,8 +28,8 @@ const Login = () => {
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
+                    <CAvatar src={avatar8} size="xl" />
                     <h1>Login</h1>
-                    <p className="text-medium-emphasis">Sign In to your account</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
@@ -46,9 +48,11 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
+                      <Link to="/">
+                        <CButton color="primary" className="px-4" >
                           Login
                         </CButton>
+                        </Link>
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">
@@ -62,12 +66,11 @@ const Login = () => {
               <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Sign up</h2>
+                    <h2>Register</h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
+                      Contact R{'&'}BD Department
                     </p>
-                    <Link to="/register">
+                    <Link to="/">
                       <CButton color="primary" className="mt-3" active tabIndex={-1}>
                         Register Now!
                       </CButton>

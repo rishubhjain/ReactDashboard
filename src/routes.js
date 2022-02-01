@@ -3,6 +3,10 @@ import React from 'react'
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
+const HRMS = React.lazy(() => import('./views/dashboard/hrms/HRMS'))
+const IWDMS = React.lazy(() => import('./views/dashboard/iwdms/IWDMS'))
+const WorkDetails = React.lazy(() => import('./views/dashboard/workDetails/WorkDetails'))
+
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -31,7 +35,7 @@ const FloatingLabels = React.lazy(() => import('./views/forms/floating-labels/Fl
 const FormControl = React.lazy(() => import('./views/forms/form-control/FormControl'))
 const InputGroup = React.lazy(() => import('./views/forms/input-group/InputGroup'))
 const Layout = React.lazy(() => import('./views/forms/layout/Layout'))
-const Range = React.lazy(() => import('./views/forms/range/Range'))
+const Work = React.lazy(() => import('./views/dashboard/work/Work'))
 const Select = React.lazy(() => import('./views/forms/select/Select'))
 const Validation = React.lazy(() => import('./views/forms/validation/Validation'))
 
@@ -53,7 +57,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/login', exact: true, name: 'Login' },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/dashboard', name: 'Dashboard', component: Dashboard, exact: true },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
@@ -81,7 +85,10 @@ const routes = [
   { path: '/forms/form-control', name: 'Form Control', component: FormControl },
   { path: '/forms/select', name: 'Select', component: Select },
   { path: '/forms/checks-radios', name: 'Checks & Radios', component: ChecksRadios },
-  { path: '/forms/range', name: 'Work', component: Range },
+  { path: '/dashboard/work', name: 'Work', component: Work },
+  { path: '/dashboard/hrms', name: 'HRMS', component: HRMS },
+  { path: '/dashboard/iwdms', name: 'IWDMS', component: IWDMS },
+  { path: '/dashboard/workDetails', name: 'WorkDetails', component: WorkDetails },
   { path: '/forms/input-group', name: 'Input Group', component: InputGroup },
   { path: '/forms/floating-labels', name: 'Floating Labels', component: FloatingLabels },
   { path: '/forms/layout', name: 'Layout', component: Layout },

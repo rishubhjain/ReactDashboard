@@ -28,7 +28,14 @@ const _nav = [
   {
     component: CNavItem,
     name: 'HRMS Dashboard',
-    to: '/dashboard',
+    to: '/dashboard/hrms',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
+
+  },
+  {
+    component: CNavItem,
+    name: 'IWDMS Dashboard',
+    to: '/dashboard/iwdms',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
 
   },

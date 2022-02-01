@@ -272,7 +272,7 @@ const rows = [
 
 
 
-const Range = () => {
+const Work = () => {
 
 
   const random = (min, max) => {
@@ -391,4 +391,4 @@ const treeData = unflatten(data)
   )
 }
 
-export default Range
+export default Work
