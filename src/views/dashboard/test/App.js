@@ -89,38 +89,10 @@ export default class App extends React.Component {
     const downloadPdfId = 'download-pdf'
 
     return (
-      <BrowserRouter basename="/react-org-chart">
-        <Route exact path="/">
+      <BrowserRouter basename="/dashboard/test">
+        <Route exact path="/dashbaord/test">
           <React.Fragment>
-            <div className="zoom-buttons">
-              <button
-                className="btn btn-outline-primary zoom-button"
-                id="zoom-in"
-              >
-                +
-              </button>
-              <button
-                className="btn btn-outline-primary zoom-button"
-                id="zoom-out"
-              >
-                -
-              </button>
-            </div>
-            <div className="download-buttons">
-              <button className="btn btn-outline-primary" id="download-image">
-                Download as image
-              </button>
-              <button className="btn btn-outline-primary" id="download-pdf">
-                Download as PDF
-              </button>
-              <a
-                className="github-link"
-                href="https://github.com/unicef/react-org-chart"
-              >
-                Github
-              </a>
-              {downloadingChart && <div>Downloading chart</div>}
-            </div>
+            
             <OrgChart
               tree={tree}
               downloadImageId={downloadImageId}

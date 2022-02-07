@@ -49,7 +49,7 @@ const Login = () => {
                     <CRow>
                       <CCol xs={6}>
                       <Link to="/">
-                        <CButton color="primary" className="px-4" >
+                        <CButton onClick={} className="px-4" >
                           Login
                         </CButton>
                         </Link>

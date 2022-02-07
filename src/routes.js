@@ -6,6 +6,10 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const HRMS = React.lazy(() => import('./views/dashboard/hrms/HRMS'))
 const IWDMS = React.lazy(() => import('./views/dashboard/iwdms/IWDMS'))
 const WorkDetails = React.lazy(() => import('./views/dashboard/workDetails/WorkDetails'))
+const TEST = React.lazy(() => import('./views/dashboard/test/App'))
+const IFMS = React.lazy(() => import('./views/dashboard/ifms/IFMS'))
+const WorkProgress = React.lazy(() => import('./views/dashboard/ifms/Progress'))
+const MainDashboard = React.lazy(() => import('./views/dashboard/MainDashboard'))
 
 
 // Base
@@ -57,7 +61,8 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/login', exact: true, name: 'Login' },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard, exact: true },
+  { path: '/dashboard/wms', name: 'Dashboard', component: Dashboard, exact: true },
+  { path: '/dashboard', name: 'MainDashbaord', component: MainDashboard, exact: true },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
@@ -88,6 +93,9 @@ const routes = [
   { path: '/dashboard/work', name: 'Work', component: Work },
   { path: '/dashboard/hrms', name: 'HRMS', component: HRMS },
   { path: '/dashboard/iwdms', name: 'IWDMS', component: IWDMS },
+  { path: '/dashboard/ifms', name: 'IFMS', component: IFMS, exact: true},
+  { path: '/dashboard/ifms/progress', name: 'WorkProgress', component: WorkProgress },
+  { path: '/dashboard/test', name: 'TEST', component: TEST },
   { path: '/dashboard/workDetails', name: 'WorkDetails', component: WorkDetails },
   { path: '/forms/input-group', name: 'Input Group', component: InputGroup },
   { path: '/forms/floating-labels', name: 'Floating Labels', component: FloatingLabels },

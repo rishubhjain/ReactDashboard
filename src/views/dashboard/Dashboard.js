@@ -12,7 +12,12 @@ import 'react-base-table/styles.css'
 
 import  { useState } from 'react'
 import {
- 
+  CCardImage,
+  CCardLink,
+  CCardText,
+  CCardTitle,
+  CListGroup,
+  CListGroupItem,
   CModal,
   CModalBody,
   CModalFooter,
@@ -20,6 +25,7 @@ import {
   CModalTitle,
 } from '@coreui/react'
 
+import {PopupModal} from "./Modal"
 
 import {
   CButton,
@@ -83,14 +89,16 @@ import {
 const Dashboard = () => {
 
   const [visible, setVisible] = useState(false)
-
+  
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
-
+  
   const newRandom = () => {
     return Math.round(Math.random() * 100)
   }
+  
+  const [hotMixChartData] = useState([newRandom(), newRandom()]);
 
   const generateColumns = (count = 10, prefix = 'column-', props) =>
   new Array(count).fill(0).map((column, columnIndex) => ({
@@ -159,6 +167,27 @@ const treeData = unflatten(data);
   return (
     <>
     {/* <CRow>
+        <CCol>
+        <CCard style={{ width: '18rem' }}>
+  <CCardImage orientation="top" src="../images/react.jpg" />
+  <CCardBody>
+    <CCardTitle>Card title</CCardTitle>
+    <CCardText>
+    </CCardText>
+  </CCardBody>
+  <CListGroup flush>
+    <CListGroupItem>Cras justo odio</CListGroupItem>
+    <CListGroupItem>Dapibus ac facilisis in</CListGroupItem>
+    <CListGroupItem>Vestibulum at eros</CListGroupItem>
+  </CListGroup>
+  <CCardBody>
+    <CCardLink href="#">Card link</CCardLink>
+    <CCardLink href="#">Another link</CCardLink>
+  </CCardBody>
+</CCard>
+        </CCol>
+    </CRow> */}
+    {/* <CRow>
       <CCol>
       <BaseTable
     columns={fixedColumns}
@@ -172,49 +201,7 @@ const treeData = unflatten(data);
     </CRow> */}
     <CRow>
       <CCol>
-     <CModal alignment="center" visible={visible} onClose={() => setVisible(false)}>
-      <CModalHeader>
-        <CModalTitle>Hot Mix Plant Status</CModalTitle>
-      </CModalHeader>
-      <CModalBody>
-      <CTable>
-        <CTableHead color="light">
-          <CTableRow>
-            <CTableHeaderCell scope="col">#</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Name of Agency</CTableHeaderCell>
-            <CTableHeaderCell scope="col">District</CTableHeaderCell>
-            <CTableHeaderCell scope="col">NetMix</CTableHeaderCell>
-          </CTableRow>
-        </CTableHead>
-        <CTableBody>
-          <CTableRow>
-            <CTableHeaderCell scope="row">1</CTableHeaderCell>
-            <CTableDataCell>Ronak Construction</CTableDataCell>
-            <CTableDataCell>Bharuch</CTableDataCell>
-            <CTableDataCell>320</CTableDataCell>
-          </CTableRow>
-          <CTableRow>
-            <CTableHeaderCell scope="row">2</CTableHeaderCell>
-            <CTableDataCell>Dev Construction</CTableDataCell>
-            <CTableDataCell>Navsari</CTableDataCell>
-            <CTableDataCell>985</CTableDataCell>
-          </CTableRow>
-          <CTableRow>
-            <CTableHeaderCell scope="row">3</CTableHeaderCell>
-            <CTableDataCell>L.G.Chaudhary</CTableDataCell>
-            <CTableDataCell>Ahmedabad</CTableDataCell>
-            <CTableDataCell>426.80</CTableDataCell>
-          </CTableRow>
-        </CTableBody>
-      </CTable>
-      </CModalBody>
-      <CModalFooter>
-        <CButton color="secondary" onClick={() => setVisible(false)}>
-          Close
-        </CButton>
-        
-      </CModalFooter>
-    </CModal>
+        <PopupModal visible={visible} setVisible={setVisible} />
       </CCol>
     </CRow>
     <CRow>
@@ -236,9 +223,9 @@ const treeData = unflatten(data);
             <CDropdown
             style={{float:'right',marginLeft:'2%'}}> 
           <CDropdownToggle color="light">All Wings</CDropdownToggle>
-          <CDropdownMenu>
-            <CDropdownItem href="#">All Wings</CDropdownItem>
-            <CDropdownItem href="#">State</CDropdownItem>
+          <CDropdownMenu onClick={() => {return}} >
+            <CDropdownItem >All Wings</CDropdownItem>
+            <CDropdownItem >State</CDropdownItem>
             <CDropdownItem href="#">NH</CDropdownItem>
             <CDropdownItem href="#">Panchayat</CDropdownItem>
             <CDropdownItem href="#">CP{'&'}A</CDropdownItem>
@@ -408,14 +395,13 @@ const treeData = unflatten(data);
                 if (event.type === "click" && elements.length) {
                   console.log(elements[0]);
                     setVisible(!visible)
-                  
                 }
               }}
               data={{
                 labels: ['Offline', 'Online'],
                 datasets: [
                   {
-                    data: [newRandom(), newRandom()],
+                    data: hotMixChartData,
                     backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)' ],
                     borderColor:['rgb(255, 99, 132)','rgb(54, 162, 235)'],
                     borderWidth: 1,

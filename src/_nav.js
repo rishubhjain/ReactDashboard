@@ -16,78 +16,83 @@ import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
   {
-    component: CNavItem,
-    name: 'Dashboard',
+    component: CNavGroup,
+    name: 'Main Dashboard',
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
+    items:[
+      {
+        component: CNavItem,
+        name: 'WMS Dashboard',
+        to: '/dashboard/wms'
+      },
+      {
+        component: CNavItem,
+        name: 'SAATHI Dashboard',
+        to: '/dashboard/hrms'
+    
+      },
+      {
+        component: CNavItem,
+        name: 'HRMS Dashboard',
+        to: '/dashboard/hrms'
+    
+      },
+      {
+        component: CNavItem,
+        name: 'IWDMS Dashboard',
+        to: '/dashboard/iwdms'
+    
+      },
+      {
+        component: CNavItem,
+        name: 'IFMS Dashboard',
+        to: '/dashboard/ifms'
+    
+      },
+      {
+        component: CNavItem,
+        name: 'GUJRAMS Dashboard',
+        to: '/dashboard/hrms'
+    
+      },
+      {
+        component: CNavItem,
+        name: 'GUJMARG Dashboard',
+        to: '/dashboard/hrms'
+    
+      },
+      {
+        component: CNavItem,
+        name: 'E-RAP Dashboard',
+        to: '/dashboard/hrms'
+    
+      },]
     },
-  },
-  {
-    component: CNavItem,
-    name: 'HRMS Dashboard',
-    to: '/dashboard/hrms',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
-
-  },
-  {
-    component: CNavItem,
-    name: 'IWDMS Dashboard',
-    to: '/dashboard/iwdms',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
-
-  },
-  {
-    component: CNavTitle,
-    name: 'WMS',
-  },
-  {
-    component: CNavItem,
-    name: 'Login',
-    to: '/dashboard',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Reports',
-    to: '/dashboard',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavTitle,
-    name: 'SAATHI',
-  },
-  {
-    component: CNavItem,
-    name: 'Login',
-    to: '/dashboard',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Reports',
-    to: '/dashboard',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavTitle,
-    name: 'IFMS',
-  },
-  {
-    component: CNavItem,
-    name: 'Login',
-    to: '/dashboard',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Reports',
-    to: '/dashboard',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  
+      {
+        component: CNavTitle,
+        name: 'Services',
+      },
+      {
+        component: CNavItem,
+        name: 'WMS',
+        to: '/dashboard',
+        icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'SAATHI',
+        to: '/dashboard',
+        icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'IFMS',
+        to: '/dashboard',
+        icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+      }
+    
+ 
 ]
 
 export default _nav
