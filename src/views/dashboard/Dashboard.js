@@ -97,7 +97,12 @@ const Dashboard = () => {
   const newRandom = () => {
     return Math.round(Math.random() * 100)
   }
-  
+  const newData = newRandom()
+  const newData1 = newRandom()
+  const newData2 = newRandom()
+  const newData3 = newRandom()
+  const newData4 = newRandom()
+
   const [hotMixChartData] = useState([newRandom(), newRandom()]);
 
   const generateColumns = (count = 10, prefix = 'column-', props) =>
@@ -125,10 +130,17 @@ const generateData = (columns, count = 200, prefix = 'row-') =>
 
   const columns = generateColumns(10)
   const data = generateData(columns, 200)
+ 
+  const [dataLabels, setdataLabels] = useState(['<5 Cr', '>=5 Cr', '>=10 Cr', '>=15 Cr', '>=20 Cr', '>=25 Cr', '>=30 Cr'])
 
-  const dataLabels = ['<5 Cr', '>=5 Cr', '>=10 Cr', '>=15 Cr', '>=20 Cr', '>=25 Cr', '>=30 Cr']
+const changeDataLabel = (prop) => {
+  if (prop == "Date") {
+    setdataLabels(['2014-15','2015-16','2016-17','2017-18', '2018-19', '2019-20', '2020-21'])
+  } else {
+    setdataLabels(['<5 Cr', '>=5 Cr', '>=10 Cr', '>=15 Cr', '>=20 Cr', '>=25 Cr', '>=30 Cr'])
+  }
 
-
+}
 
 const frozenData = generateData(columns, 3, 'frozen-row-')
 
@@ -325,8 +337,8 @@ const treeData = unflatten(data);
             style={{float:'right',marginLeft:'2%'}}> 
           <CDropdownToggle color="light">Cost Range Wise</CDropdownToggle>
           <CDropdownMenu>
-          <CDropdownItem  key="0" href="#">Date Wise</CDropdownItem>
-          <CDropdownItem  key="1" href="#">Cost Range Wise</CDropdownItem>
+          <CDropdownItem onClick={(event) => {changeDataLabel("Date");return true;}}  key="0">Date Wise</CDropdownItem>
+          <CDropdownItem onClick={(event) => {changeDataLabel("Cost");return true;}} key="1" >Cost Range Wise</CDropdownItem>
           </CDropdownMenu>
         </CDropdown>     
 
@@ -346,6 +358,7 @@ const treeData = unflatten(data);
                 z:{
                   stacked:true,
                   position: 'right',
+                  backgroundColor:'rgba(220, 159, 49, 0.2)',
                 }
               }
             }}
@@ -440,7 +453,10 @@ const treeData = unflatten(data);
 	  <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
+            <Link to={'/dashboard/wms/workorderstatus'}>
+
             <strong>Work Order Status</strong>
+            </Link>
           </CCardHeader>
           <CCardBody>
            
@@ -474,6 +490,90 @@ const treeData = unflatten(data);
         </CCard>
       </CCol>
 	  </CRow>
+    <CRow>
+    <CCol xs={6}>
+        <CCard className="mb-6">
+        <Link to="/dashboard/ifms/progress">
+          <CCardHeader> Division Wise Work Count  
+          </CCardHeader>
+          </Link>
+          <CCardBody>
+            <CChartBar
+            options={{
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked:true,
+                }, 
+                
+               
+              }
+            }}
+              data={{
+                labels: ['Division 1','Division 2','Division 3','Division 4','Division 5'],
+                datasets: [
+                  {
+                    label: 'Works',
+                    backgroundColor: '#f87979',
+                    stack: 'Stack 0',
+                    data: [newData, newData1, newData2, newData3,newData4],
+                  },
+                  
+                ],
+              }}
+              labels="months"
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={6}>
+        <CCard className="mb-6">
+        <Link to="/dashboard/ifms/progress">
+          <CCardHeader> Physical Vs Financial Progress %  
+          </CCardHeader>
+          </Link>
+          <CCardBody>
+            <CChartBar
+            options={{
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked:true,
+                  min:0,
+                  max:100,
+                }, 
+                
+               
+              }
+            }}
+              data={{
+                labels: ['Division 1','Division 2','Division 3','Division 4','Division 5'],
+                datasets: [
+                  
+                  {
+                    label: 'Physical Progress',
+                    stack: 'Stack 1',
+                    data: [newData/2, newData1/2, newData2/2, newData3/2,newData4/2],
+                    backgroundColor: 'rgba(220, 159, 49, 0.2)',
+                  },
+                  {
+                    label: 'Financial Progress',
+                    stack: 'Stack 2',
+                    data: [newData/3, newData1/3, newData2/3, newData3/3,newData4/3],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                  },
+                ],
+              }}
+              labels="months"
+            />
+          </CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
     
     </CCard>
     </CRow>

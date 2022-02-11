@@ -40,6 +40,8 @@
     "@mui/base": "^5.0.0-alpha.67",
     "@mui/icons-material": "^5.3.1",
     "@mui/material": "^5.3.1",
+    "@mui/x-data-grid": "^5.5.0",
+    "@mui/x-data-grid-generator": "^5.5.0",
     "@unicef/react-org-chart": "^0.3.4",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
     "chart.js": "^3.6.0",

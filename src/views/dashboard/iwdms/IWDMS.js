@@ -273,6 +273,57 @@ const treeData = unflatten(data);
         </CCard>
       </CCol>
     </CRow>
+    <CRow>
+	   <CCol xs={4}>
+        <CCard className="mb-6">
+          <CCardHeader>
+            Demand No Wise Count of Files
+          </CCardHeader>
+          <CCardBody>
+            <CChartPie
+              data={{
+                labels: ['083', '084','085', '086','087', '088'],
+                datasets: [
+                  {
+                    data:['4', '23','9', '49','8', '9'],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)','rgba(222, 100, 50, 0.2)','rgba(20, 100, 50, 0.2)','rgba(220, 100, 50, 0.2)','rgba(220, 50, 100, 0.2)' ],
+                    borderColor:['rgb(255, 99, 132)','rgb(54, 162, 235)'],
+                    borderWidth: 1,
+                    hoverBackgroundColor: ['#FF6384', '#36A2EB'],
+                  },
+                ],
+              }}
+            ></CChartPie>
+          </CCardBody>
+        </CCard>
+      </CCol>
+    
+    
+	   <CCol xs={4}>
+        <CCard className="mb-6">
+          <CCardHeader>
+            Demand No Wise Amount (in Lakhs) in Files
+          </CCardHeader>
+          <CCardBody>
+            <CChartPie
+              data={{
+                labels: ['083', '084','085', '086','087', '088'],
+                datasets: [
+                  {
+                    data:['1894', '7808','21732', '43630','20358', '1511'],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)','rgba(222, 100, 50, 0.2)','rgba(20, 100, 50, 0.2)','rgba(220, 100, 50, 0.2)','rgba(220, 50, 100, 0.2)' ],
+                    borderColor:['rgb(255, 99, 132)','rgb(54, 162, 235)'],
+                    borderWidth: 1,
+                    hoverBackgroundColor: ['#FF6384', '#36A2EB'],
+                  },
+                ],
+              }}
+            ></CChartPie>
+          </CCardBody>
+        </CCard>
+      </CCol>
+    
+        </CRow>  
           
           
     

@@ -121,8 +121,7 @@ const wmsChartData = {
   const handleClickGujRams = (e) => {
     e.preventDefault();
     setAnchorEl(null);
-    monthly();
-};
+    gujRamsmonthly();};
 
   return (
     <>
@@ -134,7 +133,7 @@ const wmsChartData = {
   <CDropdown
             style={{float:'right',marginLeft:'2%'}}> 
           <CDropdownToggle  value={ddValue} id='timeLineDD'  color="light">Yearly</CDropdownToggle>
-          <CDropdownMenu onChange={() => {alert("oppps")}}>
+          <CDropdownMenu >
           <CDropdownItem onClick={(event) => {monthly();document.getElementById('timeLineDD').innerText="Monthly";return true;}}>Monthly</CDropdownItem>
             <CDropdownItem >Weekly</CDropdownItem>
             <CDropdownItem >Custom Date</CDropdownItem>
@@ -526,10 +525,12 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
+                    <Link to='/dashboard/ifms'>
                         <Button size="small" disableElevation>
                             View All
                             <ChevronRightOutlinedIcon />
                         </Button>
+                        </Link>
                     </CardActions>
                 </MainCard>
       </CCol>
@@ -767,10 +768,12 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
+                    <Link to='/dashboard/gujmarg'>
                         <Button size="small" disableElevation>
                             View All
                             <ChevronRightOutlinedIcon />
                         </Button>
+                        </Link>
                     </CardActions>
                 </MainCard>
       </CCol>
@@ -977,10 +980,12 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
+                    <Link to='/dashboard/gujrams'>
                         <Button size="small" disableElevation>
                             View All
                             <ChevronRightOutlinedIcon />
                         </Button>
+                        </Link>
                     </CardActions>
                 </MainCard>
       </CCol>
@@ -1198,10 +1203,12 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
+                    <Link to='/dashboard/iwdms'>
                         <Button size="small" disableElevation>
                             View All
                             <ChevronRightOutlinedIcon />
                         </Button>
+                        </Link>
                     </CardActions>
                 </MainCard>
       </CCol>

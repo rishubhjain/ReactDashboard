@@ -20,6 +20,10 @@ const _nav = [
     name: 'Main Dashboard',
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    badge: {
+      color: 'info',
+      text: 'NEW',
+    },
     items:[
       {
         component: CNavItem,
@@ -53,13 +57,13 @@ const _nav = [
       {
         component: CNavItem,
         name: 'GUJRAMS Dashboard',
-        to: '/dashboard/hrms'
+        to: '/dashboard/gujrams'
     
       },
       {
         component: CNavItem,
         name: 'GUJMARG Dashboard',
-        to: '/dashboard/hrms'
+        to: '/dashboard/gujmarg'
     
       },
       {
@@ -68,31 +72,44 @@ const _nav = [
         to: '/dashboard/hrms'
     
       },]
-    },
-      {
-        component: CNavTitle,
-        name: 'Services',
-      },
-      {
+  },
+  {
+      component: CNavGroup,
+      name: 'Services',
+      to: '/dashboard',
+      icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+      items:[{
         component: CNavItem,
         name: 'WMS',
-        to: '/dashboard',
-        icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-      },
-      {
+        to: '/dashboard'
+  },
+  {
         component: CNavItem,
         name: 'SAATHI',
-        to: '/dashboard',
-        icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-      },
-      {
+        to: '/dashboard'
+  },
+  {
         component: CNavItem,
         name: 'IFMS',
-        to: '/dashboard',
-        icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-      }
-    
- 
+        to: '/dashboard'
+      }],
+  },
+  {
+    component: CNavTitle,
+    name: 'Features',
+  },
+  {
+    component: CNavItem,
+    name: 'MIS Reports',
+    to: '/',
+    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Config',
+    to: '/',
+    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  },
 ]
 
 export default _nav

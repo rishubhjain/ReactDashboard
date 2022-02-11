@@ -10,7 +10,11 @@ const TEST = React.lazy(() => import('./views/dashboard/test/App'))
 const IFMS = React.lazy(() => import('./views/dashboard/ifms/IFMS'))
 const WorkProgress = React.lazy(() => import('./views/dashboard/ifms/Progress'))
 const MainDashboard = React.lazy(() => import('./views/dashboard/MainDashboard'))
-
+const GujMarg = React.lazy(() => import('./views/dashboard/gujmarg/GujMarg'))
+const GujRams = React.lazy(() => import('./views/dashboard/gujrams/GujRams'))
+const SchemeWiseData = React.lazy(() => import('./views/dashboard/ifms/SchemeWiseData'))
+const HeadWiseExpense = React.lazy(() => import('./views/dashboard/ifms/HeadWiseExpense'))
+const WorkOrderStatus = React.lazy(() => import('./views/dashboard/work/WorkOrderStatus'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -62,6 +66,9 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/login', exact: true, name: 'Login' },
   { path: '/dashboard/wms', name: 'Dashboard', component: Dashboard, exact: true },
+  { path: '/dashboard/wms/workorderstatus', name: 'WorkOrderStatus', component: WorkOrderStatus, exact: true },
+  { path: '/dashboard/gujmarg', name: 'GujMarg', component: GujMarg, exact: true },
+  { path: '/dashboard/gujrams', name: 'GujRams', component: GujRams, exact: true },
   { path: '/dashboard', name: 'MainDashbaord', component: MainDashboard, exact: true },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },
@@ -94,6 +101,8 @@ const routes = [
   { path: '/dashboard/hrms', name: 'HRMS', component: HRMS },
   { path: '/dashboard/iwdms', name: 'IWDMS', component: IWDMS },
   { path: '/dashboard/ifms', name: 'IFMS', component: IFMS, exact: true},
+  { path: '/dashboard/ifms/schemewisedata', name: 'SchemeWiseData', component: SchemeWiseData, exact: true},
+  { path: '/dashboard/ifms/headwiseexpense', name: 'HeadWiseExpense', component: HeadWiseExpense, exact: true},
   { path: '/dashboard/ifms/progress', name: 'WorkProgress', component: WorkProgress },
   { path: '/dashboard/test', name: 'TEST', component: TEST },
   { path: '/dashboard/workDetails', name: 'WorkDetails', component: WorkDetails },
