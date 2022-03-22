@@ -1,0 +1,93 @@
+.popup {
+  position: fixed;
+  right: 0px;
+  top: 220px;
+  z-index: 1;
+}
+
+.actions {
+  /* margin-top: 100%; */
+  display: flex;
+  position: fixed;
+  bottom: 1%;
+  right: 0.4%;
+  z-index: 9999;
+  width: 15.6rem;
+  opacity: 1;
+  background: white;
+}
+
+.actions button {
+  width: 100%;
+  padding: 0.6rem;
+  background-color: #F3E9DD;
+  border-style: none ;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 3%;
+}
+
+#action1 {
+margin-left: 2%;
+}
+
+#action2 {
+margin-left: 2%;
+}
+
+.filter-button {
+  background-color: #2FA4FF;
+  display: flex;
+  position: fixed;
+}
+
+.filter-button span {
+  margin-right: 4.5rem;
+}
+
+.popup-open {
+  background-color: white;
+  font-weight: 600;
+}
+
+.date-picker {
+  margin: 0.2rem 6%;
+}
+
+#date-details {
+  display: flex;
+  justify-content: center;
+}
+
+.filters {
+  display: block;
+  justify-content: center;
+  overflow-y: scroll;
+  height: 62%;
+  margin-top: 17%;
+}
+
+summary:before {
+  content: "+";
+  float: right;
+  margin-right: 10px;
+  }
+ details > summary {
+   list-style: none;
+ }
+ details[open] summary:before {
+  content: "-";
+  }
+
+  details {
+    width: 95%;
+    margin: 0.3rem auto;
+    margin-top: 0.6rem;
+    padding: 0.8rem 1rem;
+    background-color: #FBF8F1;
+  }
+
+  summary {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }

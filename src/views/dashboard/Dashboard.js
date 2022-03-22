@@ -32,12 +32,12 @@ import {
   CCard,
   CCardBody,
   CCardHeader,
-  CCol,  
+  CCol,
   CRow,
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
-  CDropdownToggle,  
+  CDropdownToggle,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -60,7 +60,7 @@ import {
   cilFilter,
 } from '@coreui/icons'
 // import {
-	
+
 //   cibCcAmex,
 //   cibCcApplePay,
 //   cibCcMastercard,
@@ -89,11 +89,11 @@ import {
 const Dashboard = () => {
 
   const [visible, setVisible] = useState(false)
-  
+
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
-  
+
   const newRandom = () => {
     return Math.round(Math.random() * 100)
   }
@@ -130,7 +130,7 @@ const generateData = (columns, count = 200, prefix = 'row-') =>
 
   const columns = generateColumns(10)
   const data = generateData(columns, 200)
- 
+
   const [dataLabels, setdataLabels] = useState(['<5 Cr', '>=5 Cr', '>=10 Cr', '>=15 Cr', '>=20 Cr', '>=25 Cr', '>=30 Cr'])
 
 const changeDataLabel = (prop) => {
@@ -217,23 +217,23 @@ const treeData = unflatten(data);
       </CCol>
     </CRow>
     <CRow>
-    <CCard className="mb-4">
+    <CCard className="mb-4" style={{marginRight:'0'}} >
 
-          <CCardHeader className="me-md-3">
+          <CCardHeader className="me-md-3" style={{marginRight:'0'}}>
             <a>Works Monitoring System</a>
             <CDropdown
-            style={{float:'right',marginLeft:'2%'}}> 
+            style={{float:'right',marginLeft:'2%'}}>
           <CDropdownToggle color="light">Monthly</CDropdownToggle>
           <CDropdownMenu>
           <CDropdownItem href="#">Monthly</CDropdownItem>
             <CDropdownItem href="#">Weekly</CDropdownItem>
             <CDropdownItem href="#">Daily</CDropdownItem>
             <CDropdownItem href="#">Custom Date</CDropdownItem>
-            
+
           </CDropdownMenu>
         </CDropdown>
             <CDropdown
-            style={{float:'right',marginLeft:'2%'}}> 
+            style={{float:'right'}}>
           <CDropdownToggle color="light">All Wings</CDropdownToggle>
           <CDropdownMenu onClick={() => {return}} >
             <CDropdownItem >All Wings</CDropdownItem>
@@ -248,12 +248,12 @@ const treeData = unflatten(data);
 
           </CDropdownMenu>
         </CDropdown>
-       
-        
+
+
           </CCardHeader>
-          
+
     <CRow>
-      
+
     <CCol xs={4}>
         <CCard className="mb-3">
         <Link to="/dashboard/workDetails">
@@ -261,7 +261,7 @@ const treeData = unflatten(data);
           </Link>
           <CCardBody>
             <CChartPie
-              
+
               //onClick={() => setVisible(!visible)}
               data={{
                 labels: ['Completed', 'Dropped', 'Pending'],
@@ -286,7 +286,7 @@ const treeData = unflatten(data);
           </CCardHeader>
           <CCardBody>
             <CChartLine
-            
+
               data={{
                 labels: ['Site Information ', 'AA', 'TS', 'DTP', 'Tender', 'Tender Approval', 'Work Order'],
                 datasets: [
@@ -328,19 +328,19 @@ const treeData = unflatten(data);
           </CCardBody>
         </CCard>
        </CCol>
-	   
+
 	   <CCol xs={8}>
         <CCard className="mb-6">
           <CCardHeader>Work Order vs Expense
           <CDropdown
-          
-            style={{float:'right',marginLeft:'2%'}}> 
+
+            style={{float:'right',marginLeft:'2%'}}>
           <CDropdownToggle color="light">Cost Range Wise</CDropdownToggle>
           <CDropdownMenu>
           <CDropdownItem onClick={(event) => {changeDataLabel("Date");return true;}}  key="0">Date Wise</CDropdownItem>
           <CDropdownItem onClick={(event) => {changeDataLabel("Cost");return true;}} key="1" >Cost Range Wise</CDropdownItem>
           </CDropdownMenu>
-        </CDropdown>     
+        </CDropdown>
 
 
           </CCardHeader>
@@ -354,7 +354,7 @@ const treeData = unflatten(data);
                 y: {
                   stacked:true,
                   position: 'left',
-                }, 
+                },
                 z:{
                   stacked:true,
                   position: 'right',
@@ -387,10 +387,10 @@ const treeData = unflatten(data);
         </CCard>
       </CCol>
     </CRow>
-          
-          
+
+
     <CRow>
-	   
+
 	  </CRow>
     <CRow className="mb-2">
     <CCard className="mb-2">
@@ -459,7 +459,7 @@ const treeData = unflatten(data);
             </Link>
           </CCardHeader>
           <CCardBody>
-           
+
                 <CButton color="danger"  size="lg" style={{width:'150px'}}  className="me-md-3" variant="outline" key="0" >
                   Total
                   <p fontSize="medium" style={{color:'black'}} >100</p>
@@ -484,7 +484,7 @@ const treeData = unflatten(data);
                   Completed
 				  <p fontSize="medium" style={{color:'black'}} >40</p>
                 </CButton>
-                
+
 
           </CCardBody>
         </CCard>
@@ -494,7 +494,7 @@ const treeData = unflatten(data);
     <CCol xs={6}>
         <CCard className="mb-6">
         <Link to="/dashboard/ifms/progress">
-          <CCardHeader> Division Wise Work Count  
+          <CCardHeader> Division Wise Work Count
           </CCardHeader>
           </Link>
           <CCardBody>
@@ -506,9 +506,9 @@ const treeData = unflatten(data);
                 },
                 y: {
                   stacked:true,
-                }, 
-                
-               
+                },
+
+
               }
             }}
               data={{
@@ -520,7 +520,7 @@ const treeData = unflatten(data);
                     stack: 'Stack 0',
                     data: [newData, newData1, newData2, newData3,newData4],
                   },
-                  
+
                 ],
               }}
               labels="months"
@@ -531,7 +531,7 @@ const treeData = unflatten(data);
       <CCol xs={6}>
         <CCard className="mb-6">
         <Link to="/dashboard/ifms/progress">
-          <CCardHeader> Physical Vs Financial Progress %  
+          <CCardHeader> Physical Vs Financial Progress %
           </CCardHeader>
           </Link>
           <CCardBody>
@@ -545,15 +545,15 @@ const treeData = unflatten(data);
                   stacked:true,
                   min:0,
                   max:100,
-                }, 
-                
-               
+                },
+
+
               }
             }}
               data={{
                 labels: ['Division 1','Division 2','Division 3','Division 4','Division 5'],
                 datasets: [
-                  
+
                   {
                     label: 'Physical Progress',
                     stack: 'Stack 1',
@@ -574,7 +574,7 @@ const treeData = unflatten(data);
         </CCard>
       </CCol>
     </CRow>
-    
+
     </CCard>
     </CRow>
     </>

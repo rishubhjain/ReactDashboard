@@ -5,9 +5,10 @@ import { CContainer, CSpinner } from '@coreui/react'
 // routes config
 import routes from '../routes'
 
-const AppContent = () => {
+const AppContent = (props) => {
+  const myProps=props
   return (
-    <CContainer lg style={{marginLeft:'10px',marginRight:'10px'}}>
+    <CContainer lg style={{marginLeft:'0',marginRight:'0',padding:'0',maxWidth: '100%'}}>
       <Suspense fallback={<CSpinner color="primary" />}>
         <Switch>
           {routes.map((route, idx) => {
@@ -20,7 +21,7 @@ const AppContent = () => {
                   name={route.name}
                   render={(props) => (
                     <>
-                      <route.component {...props} />
+                      <route.component {...props} {...myProps}/>
                     </>
                   )}
                 />
