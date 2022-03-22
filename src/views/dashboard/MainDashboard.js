@@ -6,6 +6,7 @@ import { Column,
   TableRow as BaseTableRow, } from 'react-base-table'
 import 'react-base-table/styles.css'
 import 'chart.piecelabel.js';
+import './MainDashboard.css';
 
 import  { useState } from 'react'
 
@@ -29,29 +30,29 @@ import {
     CCardTitle,
     CListGroup,
     CListGroupItem,
-    
+
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
-  CDropdownToggle,  
+  CDropdownToggle,
   CCard,
   CCardBody,
   CCardHeader,
-  CCol,  
+  CCol,
   CRow,
 
 } from '@coreui/react'
 import { CChartBar, CChartLine,
   CChartPie, } from '@coreui/react-chartjs'
+import Pill from './Pill';
 
 
-const MainDashboard = () => {
+const MainDashboard = (props) => {
    const gridSpacing = 3;
    let ddValue = "Yearly"
    const drawerWidth = 260;
    const appDrawerWidth = 320;
   const [visible, setVisible] = useState(false)
-
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
@@ -61,7 +62,7 @@ const MainDashboard = () => {
   }
   const theme = useTheme();
 
-  
+
   let [wmsData, setwmsData] = useState(['40','58','68','60','56'])
   let [wmsEData, setwmsEData] = useState(['60','78','52','78','90'])
  let  [wmsDataLabel, setwmsLabelData] = useState(['2017',"2018","2019",'2020','2021'])
@@ -123,25 +124,56 @@ const wmsChartData = {
     setAnchorEl(null);
     gujRamsmonthly();};
 
+    const myProps = [
+        props.type1,
+        props.type2,
+        props.type3,
+        props.type4,
+        props.state,
+        props.national,
+        props.panchayat,
+        props.startDate,
+        props.endDate
+    ]
+
+    const myPropsNames = [
+        'Type1',
+        'Type2',
+        'Type3',
+        'Type4',
+        'State Highway',
+        'National Highway',
+        'Panchayat',
+        'From',
+        'To'
+    ]
+
   return (
     <>
     <CRow>
     <CCard className="mb-4">
 
 <CCardHeader className="me-md-3">
-  <a></a>
+    <div className='filter-pills'>
+    {
+        myProps.map((ftr,index) => {
+            if(index<7 && ftr) return <Pill key={index} filter={myPropsNames[index]} />
+            else if (index>=7) return <Pill key={index} filter={`${myPropsNames[index]} : ${ftr.getDate()}/${ftr.getMonth()+1}/${ftr.getFullYear()}`} />
+        })
+    }
+    </div>
   <CDropdown
-            style={{float:'right',marginLeft:'2%'}}> 
+            style={{float:'right',marginLeft:'3%',height:'3rem'}}>
           <CDropdownToggle  value={ddValue} id='timeLineDD'  color="light">Yearly</CDropdownToggle>
           <CDropdownMenu >
           <CDropdownItem onClick={(event) => {monthly();document.getElementById('timeLineDD').innerText="Monthly";return true;}}>Monthly</CDropdownItem>
             <CDropdownItem >Weekly</CDropdownItem>
             <CDropdownItem >Custom Date</CDropdownItem>
-            
+
           </CDropdownMenu>
         </CDropdown>
             <CDropdown
-            style={{float:'right',marginLeft:'2%'}}> 
+            style={{float:'right',marginLeft:'1%',height:'3rem'}}>
           <CDropdownToggle  color="light">All Wings</CDropdownToggle>
           <CDropdownMenu  >
             <CDropdownItem >All Wings</CDropdownItem>
@@ -156,12 +188,13 @@ const wmsChartData = {
 
           </CDropdownMenu>
         </CDropdown>
-        
+
   </CCardHeader>
   </CCard>
     </CRow>
-    <CRow >
-      <CCol style={{flex:'0 0',paddingRight:'25px'}}> 
+    <div style={{width: '93%', margin: '0 auto'}}>
+    <CRow className='dcard'>
+      <CCol className='ccol-container' style={{flex:'0 0',paddingRight:'1%', marginBottom: '4%',}}>
       <MainCard content={false} style={{ width: '25rem', border:'0px', borderRadius:'15px' }}>
                     <CardContent>
                         <Grid container spacing={gridSpacing}>
@@ -216,7 +249,7 @@ const wmsChartData = {
                                           stacked:true,
                                           position: 'left',
 
-                                        }, 
+                                        },
                                         z:{
                                           stacked:true,
                                           position: 'right',
@@ -226,13 +259,13 @@ const wmsChartData = {
                                         }
                                       } }
 
-                                    
+
                                 }
                                  data={wmsChartData}
 
                                 />
                             {/* <CChartPie
-              
+
                                 //onClick={() => setVisible(!visible)}
                                 data={{
                                     labels: ['Completed', 'Dropped', 'Pending'],
@@ -295,7 +328,7 @@ const wmsChartData = {
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            23 Crore 
+                                                            23 Crore
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -353,24 +386,26 @@ const wmsChartData = {
                                             </Grid>
                                         </Grid>
                                     </Grid>
-                                    
+
                                 </Grid>
                                 <Divider sx={{ my: 1.5 }} />
                             </Grid>
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                        <Link to='/dashboard/wms'>
-                        <Button size="small" disableElevation>
+                        <Link id='card-link' to='/dashboard/wms' >
+                        {/* <Button variant="contained" disableElevation style={{bottom: '0.5rem'}}> */}
+                          <button id='view-all-btn'>
                             View All
                             <ChevronRightOutlinedIcon />
-                        </Button>
+                            </button>
+                        {/* </Button> */}
                         </Link>
                     </CardActions>
                 </MainCard>
       </CCol>
-      <CCol style={{flex:'0 0',paddingRight:'15px'}}> 
-      <MainCard content={false} style={{ width: '26rem', border:'0px', borderRadius:'15px' }}>
+      <CCol className='ccol-container' style={{flex:'0 0',paddingRight:'1%', marginBottom: '4%'}}>
+      <MainCard content={false} style={{ width: '25rem', border:'0px', borderRadius:'15px' }}>
                     <CardContent>
                         <Grid container spacing={gridSpacing}>
                             <Grid item xs={12}>
@@ -378,12 +413,12 @@ const wmsChartData = {
                                     <Grid item>
                                         <Typography variant="h7">Integrated Financial Management System</Typography>
                                     </Grid>
-                                    
+
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} sx={{ pt: '16px !important' }}>
                             <CChartPie
-              
+
                                 //onClick={() => setVisible(!visible)}
                                 data={{
                                     labels: ['Allocated Budget', 'Expense', 'Remaining Budget'],
@@ -434,7 +469,7 @@ const wmsChartData = {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: 'success.dark' }}>
-                                           
+
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -475,7 +510,7 @@ const wmsChartData = {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                                           
+
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -516,7 +551,7 @@ const wmsChartData = {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                                           
+
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -525,16 +560,20 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                    <Link to='/dashboard/ifms'>
-                        <Button size="small" disableElevation>
+                    <Link id='card-link' to='/dashboard/ifms' >
+                        {/* <Button variant="contained" disableElevation style={{top: '3rem'}}>
                             View All
                             <ChevronRightOutlinedIcon />
-                        </Button>
+                        </Button> */}
+                        <button id='view-all-btn'>
+                            View All
+                            <ChevronRightOutlinedIcon />
+                        </button>
                         </Link>
                     </CardActions>
                 </MainCard>
       </CCol>
-      <CCol style={{flex:'0 0',paddingRight:'25px'}}> 
+      <CCol className='ccol-container' style={{flex:'0 0',paddingRight:'1%',marginBottom: '4%',}}>
       <MainCard content={false} style={{ width: '25rem', border:'0px', borderRadius:'15px' }}>
                     <CardContent>
                         <Grid container spacing={gridSpacing}>
@@ -592,7 +631,7 @@ const wmsChartData = {
                                         stacked:true,
                                         min:0,
                                         max:100,
-                                        }, 
+                                        },
                                     }
                                     }}
                                     data={{
@@ -619,7 +658,7 @@ const wmsChartData = {
                                     labels="months"
                                     />
                             {/* <CChartPie
-                                
+
                                 options={{
                                     pieceLabel: {
                                     render: 'value'
@@ -759,7 +798,7 @@ const wmsChartData = {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                                            
+
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -768,17 +807,21 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                    <Link to='/dashboard/gujmarg'>
-                        <Button size="small" disableElevation>
+                    <Link id='card-link' to='/dashboard/gujmarg' >
+                        {/* <Button variant="contained" disableElevation style={{bottom: '0.5rem'}}>
                             View All
                             <ChevronRightOutlinedIcon />
-                        </Button>
+                        </Button> */}
+                        <button id='view-all-btn'>
+                            View All
+                            <ChevronRightOutlinedIcon />
+                        </button>
                         </Link>
                     </CardActions>
                 </MainCard>
       </CCol>
-      <CCol style={{flex:'0 0',paddingTop:'20px', paddingRight:'25px'}}> 
-      <MainCard content={false} style={{ width: '27rem', border:'0px', borderRadius:'15px' }}>
+      <CCol className='ccol-container' style={{flex:'0 0', paddingRight:'1%',marginBottom: '4%'}}>
+      <MainCard content={false} style={{ width: '25rem', border:'0px', borderRadius:'15px' }}>
                     <CardContent>
                         <Grid container spacing={gridSpacing}>
                             <Grid item xs={12}>
@@ -835,7 +878,7 @@ const wmsChartData = {
                                         stacked:true,
                                         min:0,
                                         max:100,
-                                        }, 
+                                        },
                                     }
                                     }}
                                     data={{
@@ -860,7 +903,7 @@ const wmsChartData = {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    Total Network 
+                                                    Total Network
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
@@ -900,7 +943,7 @@ const wmsChartData = {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    Total Surveyed 
+                                                    Total Surveyed
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
@@ -971,7 +1014,7 @@ const wmsChartData = {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                                            
+
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -980,17 +1023,21 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                    <Link to='/dashboard/gujrams'>
-                        <Button size="small" disableElevation>
+                    <Link id='card-link' to='/dashboard/gujrams' >
+                        {/* <Button variant="contained" disableElevation style={{top: '2rem'}}>
                             View All
                             <ChevronRightOutlinedIcon />
-                        </Button>
+                        </Button> */}
+                        <button id='view-all-btn'>
+                            View All
+                            <ChevronRightOutlinedIcon />
+                        </button>
                         </Link>
                     </CardActions>
                 </MainCard>
       </CCol>
-      
-      <CCol style={{flex:'0 0',paddingRight:'25px', paddingTop:'20px'}}> 
+
+      <CCol className='ccol-container' style={{flex:'0 0',paddingRight:'1%', marginBottom: '4%'}}>
       <MainCard content={false} style={{ width: '25rem',  border:'0px', borderRadius:'15px' }}>
                     <CardContent>
                         <Grid container spacing={gridSpacing}>
@@ -1048,7 +1095,7 @@ const wmsChartData = {
                                         stacked:true,
                                         min:0,
                                         max:100,
-                                        }, 
+                                        },
                                     }
                                     }}
                                     data={{
@@ -1112,7 +1159,7 @@ const wmsChartData = {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: 'success.dark' }}>
-                                        
+
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -1153,7 +1200,7 @@ const wmsChartData = {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                                            
+
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -1194,7 +1241,7 @@ const wmsChartData = {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                                           
+
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -1203,16 +1250,20 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                    <Link to='/dashboard/iwdms'>
-                        <Button size="small" disableElevation>
+                    <Link id='card-link' to='/dashboard/iwdms' >
+                        {/* <Button variant="contained" disableElevation style={{bottom: '0.5rem'}}>
                             View All
                             <ChevronRightOutlinedIcon />
-                        </Button>
+                        </Button> */}
+                        <button id='view-all-btn'>
+                            View All
+                            <ChevronRightOutlinedIcon />
+                        </button>
                         </Link>
                     </CardActions>
                 </MainCard>
       </CCol>
-      {/* <CCol style={{flex:'0 0',paddingRight:'25px'}}> 
+      {/* <CCol style={{flex:'0 0',paddingRight:'25px'}}>
       <MainCard content={false} style={{ width: '25rem' }}>
                     <CardContent>
                         <Grid container spacing={gridSpacing}>
@@ -1257,7 +1308,7 @@ const wmsChartData = {
                             </Grid>
                             <Grid item xs={12} sx={{ pt: '16px !important' }}>
                             <CChartPie
-              
+
                                 //onClick={() => setVisible(!visible)}
                                 data={{
                                     labels: ['Completed', 'Dropped', 'Pending'],
@@ -1407,12 +1458,13 @@ const wmsChartData = {
                 </MainCard>
       </CCol> */}
     </CRow>
-{/* 
+    </div>
+{/*
     <CRow>
         <CCol>
         <CCard style={{ width: '20rem' }}>
         <CChartPie
-              
+
               //onClick={() => setVisible(!visible)}
               data={{
                 labels: ['Completed', 'Dropped', 'Pending'],
@@ -1449,7 +1501,7 @@ const wmsChartData = {
         </CCol>
     </CRow> */}
 
-   
+
     </>
   )
 }

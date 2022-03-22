@@ -1,0 +1,34 @@
+#card-link {
+    text-decoration: none;
+}
+
+#view-all-btn {
+    text-transform: uppercase;
+    padding: 0.7rem;
+    font-size: 1rem;
+    background-color: #2FA4FF;
+    color: #fff;
+    font-weight: 600;
+    border-style: none;
+    border-radius: 0.6rem;
+}
+
+.me-md-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    padding: 0.1rem 0.3rem;
+}
+
+.dcard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px,360px));
+    grid-gap: 2rem;
+    justify-content: center;
+}
