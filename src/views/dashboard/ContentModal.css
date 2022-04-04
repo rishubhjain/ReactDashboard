@@ -1,0 +1,21 @@
+#content-modal-container {
+   left:0;
+   top:8rem;
+    z-index: 100;
+    position: fixed;
+    width: 96%;
+    margin-left: 2%;
+    padding: 2rem;
+    height:80%;
+    background-color: #FFF6EA;
+    border: 0.2rem solid;
+    overflow-y: scroll ;
+}
+
+.content-modal-close {
+    right: 0;
+    margin-right: 2%;
+    top: 8rem;
+    position: fixed;
+    background: none;
+}

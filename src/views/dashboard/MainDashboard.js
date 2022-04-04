@@ -17,6 +17,12 @@ import { Avatar, Button, CardActions, CardContent, Divider, Grid, Menu, MenuItem
 
 // project imports
 import { MainCard } from 'src/components'
+import IFMS from './ifms/IFMS.js'
+import GujMarg from './gujmarg/GujMarg';
+import GujRams from './gujrams/GujRams';
+import IWDMS from './iwdms/IWDMS';
+import ContentModal from './ContentModal.js'
+import Dashboard from './Dashboard.js'
 
 // assets
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
@@ -148,8 +154,12 @@ const wmsChartData = {
         'To'
     ]
 
+    const [open, setOpen] = useState(false)
+    const [content, setContent] = useState('')
+
   return (
     <>
+    {open && <ContentModal cardComponent={content} onClose={() => setOpen(false)} />}
     <CRow>
     <CCard className="mb-4">
 
@@ -393,14 +403,18 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                        <Link id='card-link' to='/dashboard/wms' >
+                        {/* <Link id='card-link' to='/dashboard/wms' > */}
                         {/* <Button variant="contained" disableElevation style={{bottom: '0.5rem'}}> */}
-                          <button id='view-all-btn'>
+                        <button onClick={() => {
+                                    setOpen(true)
+                                    setContent(<Dashboard />)
+                                }}
+                            id='view-all-btn'>
                             View All
                             <ChevronRightOutlinedIcon />
-                            </button>
+                        </button>
                         {/* </Button> */}
-                        </Link>
+                        {/* </Link> */}
                     </CardActions>
                 </MainCard>
       </CCol>
@@ -560,16 +574,20 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                    <Link id='card-link' to='/dashboard/ifms' >
+                    {/* <Link id='card-link' to='/dashboard/ifms' > */}
                         {/* <Button variant="contained" disableElevation style={{top: '3rem'}}>
                             View All
                             <ChevronRightOutlinedIcon />
                         </Button> */}
-                        <button id='view-all-btn'>
+                        <button onClick={() => {
+                                    setOpen(true)
+                                    setContent(<IFMS />)
+                                }}
+                            id='view-all-btn'>
                             View All
                             <ChevronRightOutlinedIcon />
                         </button>
-                        </Link>
+                        {/* </Link> */}
                     </CardActions>
                 </MainCard>
       </CCol>
@@ -807,16 +825,20 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                    <Link id='card-link' to='/dashboard/gujmarg' >
+                    {/* <Link id='card-link' to='/dashboard/gujmarg' > */}
                         {/* <Button variant="contained" disableElevation style={{bottom: '0.5rem'}}>
                             View All
                             <ChevronRightOutlinedIcon />
                         </Button> */}
-                        <button id='view-all-btn'>
+                         <button onClick={() => {
+                                    setOpen(true)
+                                    setContent(<GujMarg />)
+                                }}
+                            id='view-all-btn'>
                             View All
                             <ChevronRightOutlinedIcon />
                         </button>
-                        </Link>
+                        {/* </Link> */}
                     </CardActions>
                 </MainCard>
       </CCol>
@@ -1023,16 +1045,20 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                    <Link id='card-link' to='/dashboard/gujrams' >
+                    {/* <Link id='card-link' to='/dashboard/gujrams' > */}
                         {/* <Button variant="contained" disableElevation style={{top: '2rem'}}>
                             View All
                             <ChevronRightOutlinedIcon />
                         </Button> */}
-                        <button id='view-all-btn'>
+                       <button onClick={() => {
+                                    setOpen(true)
+                                    setContent(<GujRams />)
+                                }}
+                            id='view-all-btn'>
                             View All
                             <ChevronRightOutlinedIcon />
                         </button>
-                        </Link>
+                        {/* </Link> */}
                     </CardActions>
                 </MainCard>
       </CCol>
@@ -1250,16 +1276,20 @@ const wmsChartData = {
                         </Grid>
                     </CardContent>
                     <CardActions sx={{ p: 1.25, pt: 0, justifyContent: 'center' }}>
-                    <Link id='card-link' to='/dashboard/iwdms' >
+                    {/* <Link id='card-link' to='/dashboard/iwdms' > */}
                         {/* <Button variant="contained" disableElevation style={{bottom: '0.5rem'}}>
                             View All
                             <ChevronRightOutlinedIcon />
                         </Button> */}
-                        <button id='view-all-btn'>
+                        <button onClick={() => {
+                                    setOpen(true)
+                                    setContent(<IWDMS />)
+                                }}
+                            id='view-all-btn'>
                             View All
                             <ChevronRightOutlinedIcon />
                         </button>
-                        </Link>
+                        {/* </Link> */}
                     </CardActions>
                 </MainCard>
       </CCol>

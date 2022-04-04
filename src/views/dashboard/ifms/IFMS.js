@@ -57,7 +57,7 @@ const IFMS = () => {
     <>
     
 <CRow style={{ marginTop: "2%" }}>
-            <CCol style={{ marginTop: "2%" }} sm={4}>
+            <CCol style={{ marginTop: "4%" }} sm={4}>
               <CWidgetStatsA
                 className="mb-4"
                 color="info"
@@ -143,7 +143,7 @@ const IFMS = () => {
             </CCol>
 
            
-            <CCol style={{ marginTop: "2%" }} sm={4}>
+            <CCol style={{ marginTop: "4%" }} sm={4}>
               <CWidgetStatsA
                 className="mb-4"
                 color="danger"
@@ -227,7 +227,7 @@ const IFMS = () => {
                 }
               />
             </CCol>
-            <CCol style={{ marginTop: "2%" }} xs={4} >
+            <CCol style={{ marginTop: "4%" }} xs={4} >
               <CWidgetStatsB
                 style={{ height: "160px"}}
                 className="mb-3"
