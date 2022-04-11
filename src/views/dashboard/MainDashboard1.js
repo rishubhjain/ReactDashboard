@@ -1,11 +1,12 @@
 import React, { lazy } from 'react'
 import 'react-base-table/styles.css'
 import 'chart.piecelabel.js';
+import './Main.css'
 
 import  { useState } from 'react'
 
 // project imports
-import { MainCard } from 'src/components'
+import { Card} from 'src/components/Card'
 
 import {
 CDropdown,
@@ -19,8 +20,6 @@ CDropdown,
   CRow,
 
 } from '@coreui/react'
-import { CChartBar, CChartLine,
-  CChartPie, } from '@coreui/react-chartjs'
 
 
 const MainDashboard = () => {
@@ -28,6 +27,12 @@ const MainDashboard = () => {
    let ddValue = "Yearly"
 
   const [visible, setVisible] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [content, setContent] = useState('')
+  const onCardExpand = title => {
+    setOpen(true)
+    setContent(title)
+  }
 
   const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -72,6 +77,15 @@ const MainDashboard = () => {
   </CCardHeader>
   </CCard>
     </CRow>
+    <CRow>
+     
+       <Card className="dcard" title='Work Monitoring System' >
+    
+
+      </Card>
+     
+    </CRow>
+    
     </>
   )
 }

@@ -8,6 +8,7 @@ import DocsCallout from './DocsCallout'
 import DocsLink from './DocsLink'
 import DocsExample from './DocsExample'
 import MainCard from './MainCard'
+import Card  from './Card/Card'
 
 export {
   AppBreadcrumb,
@@ -20,4 +21,5 @@ export {
   DocsLink,
   DocsExample,
   MainCard,
+  Card,
 }
