@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-const MainDashboard = React.lazy(() => import('./views/dashboard/MainDashboard'))
+const MainDashboard = React.lazy(() => import('./views/dashboard/MainDashboard1'))
 
 
 const routes = [
