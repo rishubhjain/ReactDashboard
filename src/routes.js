@@ -9,7 +9,7 @@ const WorkDetails = React.lazy(() => import('./views/dashboard/workDetails/WorkD
 const TEST = React.lazy(() => import('./views/dashboard/test/App'))
 const IFMS = React.lazy(() => import('./views/dashboard/ifms/IFMS'))
 const WorkProgress = React.lazy(() => import('./views/dashboard/ifms/Progress'))
-const MainDashboard = React.lazy(() => import('./views/dashboard/MainDashboard'))
+const MainDashboard = React.lazy(() => import('./views/dashboard/MainDashboard1'))
 const GujMarg = React.lazy(() => import('./views/dashboard/gujmarg/GujMarg'))
 const GujRams = React.lazy(() => import('./views/dashboard/gujrams/GujRams'))
 const SchemeWiseData = React.lazy(() => import('./views/dashboard/ifms/SchemeWiseData'))
